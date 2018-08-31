@@ -30,7 +30,7 @@ object fxMongoDBView: TfxMongoDBView
     end
     object ToggleSwitch1: TToggleSwitch
       Left = 304
-      Top = 8
+      Top = 15
       Width = 72
       Height = 20
       TabOrder = 1
@@ -50,8 +50,13 @@ object fxMongoDBView: TfxMongoDBView
       Width = 137
       Height = 21
       TabOrder = 3
+      Text = 'QG3'
+      OnChange = cbDocumentChange
+      Items.Strings = (
+        'QG3')
+      ItemIndex = 0
     end
-    object RzEdit1: TRzEdit
+    object edtObjectId: TRzEdit
       Left = 568
       Top = 8
       Width = 129
@@ -75,9 +80,5 @@ object fxMongoDBView: TfxMongoDBView
     Height = 558
     Align = alClient
     TabOrder = 1
-    ExplicitLeft = 24
-    ExplicitTop = 56
-    ExplicitWidth = 737
-    ExplicitHeight = 513
   end
 end

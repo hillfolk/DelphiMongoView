@@ -18,10 +18,11 @@ type
         nedtPort: TRzNumericEdit;
         cbDocument: TRzComboBox;
         mLog: TRzMemo;
-        RzEdit1: TRzEdit;
+        edtObjectId: TRzEdit;
         btnSearch: TRzButton;
         procedure ToggleSwitch1Click(Sender: TObject);
         procedure btnSearchClick(Sender: TObject);
+        procedure cbDocumentChange(Sender: TObject);
     private
         { Private declarations }
         Client: IgoMongoClient;
@@ -45,6 +46,11 @@ begin
     InsertADoucment;
 end;
 
+procedure TfxMongoDBView.cbDocumentChange(Sender: TObject);
+begin
+    Database := Client.GetDatabase(cbDocument.Text);
+end;
+
 procedure TfxMongoDBView.InsertADoucment;
 var
     Doc: TgoBsonDocument;
@@ -52,6 +58,7 @@ var
     Collection: IgoMongoCollection;
     Count: Integer;
 begin
+
     Collection := Database.GetCollection('restaurants');
     Count := 0;
 
@@ -74,16 +81,26 @@ begin
 end;
 
 procedure TfxMongoDBView.ToggleSwitch1Click(Sender: TObject);
+var
+    LDatabases: TArray<TgoBsonDocument>;
+    LBsonType: TgoBsonValue;
+    i: Integer;
 begin
     if ToggleSwitch1.State = tssOn then
     begin
-        Client := TgoMongoClient.Create('localhost');
+        Client := TgoMongoClient.Create(edtAddr.Text);
 
-        Database := Client.GetDatabase('QG3');
-        Log('Connected:' + Database.Name);
+        LDatabases := Client.ListDatabases;
+        if Length(LDatabases) > 0 then
+        begin
+            for i := 0 to Length(LDatabases) - 1 do
+            begin
+                cbDocument.Add(LDatabases[i].Get('name', LBsonType).ToString());
+            end;
+            cbDocument.ItemIndex := 0;
+            Database := Client.GetDatabase(cbDocument.Text);
 
-        Collection := Database.GetCollection('restaurants');
-        Log('Collection:' + Collection.Name);
+        end;
 
     end;
 end;
