@@ -3,9 +3,9 @@ program MongoDBView;
 uses
   Vcl.Forms,
   uMain in 'uMain.pas' {fxMongoDBView},
-  Grijjy.MongoDB in '..\DelphiMongoDB\Grijjy.MongoDB.pas',
-  Grijjy.MongoDB.Protocol in '..\DelphiMongoDB\Grijjy.MongoDB.Protocol.pas',
-  Grijjy.MongoDB.Queries in '..\DelphiMongoDB\Grijjy.MongoDB.Queries.pas';
+  Grijjy.MongoDB in 'DelphiMongoDB\Grijjy.MongoDB.pas',
+  Grijjy.MongoDB.Protocol in 'DelphiMongoDB\Grijjy.MongoDB.Protocol.pas',
+  Grijjy.MongoDB.Queries in 'DelphiMongoDB\Grijjy.MongoDB.Queries.pas';
 
 {$R *.res}
 
